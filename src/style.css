@@ -1,0 +1,29 @@
+/* body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+} */
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+  height: 300px;
+  border: 2px solid blue;
+}
+
+.arrow {
+  font-size: 80px;
+  cursor: pointer;
+}
+
+img {
+  width: 300px;
+}
+
+.navigation {
+  text-align: center;
+  color: transparent;
+  text-shadow: 0 0 lightgray;
+}

@@ -13,21 +13,31 @@
   border: 2px solid blue;
 }
 
+.arrow,
+li {
+  cursor: pointer;
+}
+
 .arrow {
   font-size: 80px;
-  cursor: pointer;
 }
 
 img {
   width: 300px;
 }
 
-.navigation {
+menu {
   display: flex;
   justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
-a {
+li {
   color: transparent;
+  text-shadow: 0 0 darkgray;
+}
+
+li:hover {
   text-shadow: 0 0 lightgray;
 }

@@ -8,19 +8,30 @@ const slides = [
 ];
 const img = document.querySelector('img');
 img.setAttribute('src', slides[0]);
-let currentSlide = slides[0];
 
 const navigation = document.querySelector('.navigation');
 // Create dot with link corresponding to each slide
 slides.forEach(slide => {
-  console.log(slide);
-  const nav = document.createElement('a');
+  const nav = document.createElement('li');
   nav.setAttribute('href', slide);
   nav.textContent = '⚫';
   navigation.append(nav);
 });
 
-let currentIndex = slides.indexOf(currentSlide);
+// Index of current slide
+let index = 0;
+
+const nav = document.querySelectorAll('li');
+// Display correct slide when clicked
+nav.forEach(li =>
+  li.addEventListener('click', function () {
+    console.log(this);
+    img.setAttribute('src', li.getAttribute('href'));
+
+    // Update current index (for arrow navigation)
+    index = slides.indexOf(li.getAttribute('href'));
+  })
+);
 
 const arrows = document.getElementsByClassName('arrow');
 [...arrows].forEach(arrow =>
@@ -30,17 +41,15 @@ const arrows = document.getElementsByClassName('arrow');
 );
 
 function previousSlide() {
-  // if currentIndex is on first slide, restart slides from ending; else go to previous slide
-  currentSlide =
-    currentIndex <= 0 ? slides[slides.length - 1] : slides[currentIndex - 1];
-  currentIndex = slides.indexOf(currentSlide);
-  img.setAttribute('src', currentSlide);
+  // if index is on first slide, restart slides from ending; else go to previous slide
+  index = index <= 0 ? slides.length - 1 : index - 1;
+  img.setAttribute('src', slides[index]);
 }
 
 function nextSlide() {
-  // if currentIndex is on last slide, restart slides from beginning; else go to next slide
-  currentSlide =
-    currentIndex >= slides.length - 1 ? slides[0] : slides[currentIndex + 1];
-  currentIndex = slides.indexOf(currentSlide);
-  img.setAttribute('src', currentSlide);
+  // if index is on last slide, restart slides from beginning; else go to next slide
+  index = index >= slides.length - 1 ? 0 : index + 1;
+  img.setAttribute('src', slides[index]);
 }
+
+// TODO: Add animations to slides

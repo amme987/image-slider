@@ -23,7 +23,11 @@ img {
 }
 
 .navigation {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+a {
   color: transparent;
   text-shadow: 0 0 lightgray;
 }

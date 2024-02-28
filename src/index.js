@@ -9,10 +9,8 @@ const slides = [
   '../src/forest.jpg',
   '../src/mountains.jpeg',
 ];
-// const img = document.querySelector('img');
-// img.setAttribute('src', slides[0]);
 
-[...slides].forEach(slide => {
+slides.forEach(slide => {
   const image = document.createElement('img');
   image.setAttribute('src', slide);
   images.appendChild(image);
@@ -21,37 +19,27 @@ const slides = [
 const arrows = document.getElementsByClassName('arrow');
 let index = 0;
 [...arrows].forEach(arrow =>
-  arrow.addEventListener('click', function (e) {
-    // console.log(e);
-    this.matches('.previous') ? previousSlide() : nextSlide();
+  arrow.addEventListener('click', function () {
+    if (this.matches('.previous')) {
+      index -= 1;
+      if (index < 0) {
+        index = slides.length - 1;
+      }
+    } else {
+      index += 1;
+      if (index >= slides.length) {
+        index = 0;
+      }
+    }
+    translateSlide();
   })
 );
 
-function previousSlide() {
-  index -= 1;
-  if (index < 0) {
-    index = slides.length - 1;
-  }
+function translateSlide() {
   const tests = document.querySelectorAll('img');
-  [...tests].forEach(
+  tests.forEach(
     test => (test.style.transform = `translate(${index * -300}px)`)
   );
-  console.log(index);
-}
-
-function nextSlide() {
-  index += 1;
-  if (index >= slides.length) {
-    // const repeat = images.cloneNode(true).childNodes;
-    // images.appendChild([...repeat][0]);
-    index = 0;
-  }
-  const tests = document.querySelectorAll('img');
-  console.log([...tests]);
-  [...tests].forEach(test => {
-    test.style.transform = `translate(${index * -300}px)`;
-  });
-  console.log(index);
 }
 
 const navigation = document.querySelector('.navigation');
@@ -62,6 +50,28 @@ slides.forEach(slide => {
   nav.textContent = '🔘';
   navigation.append(nav);
 });
+
+const li = document.querySelectorAll('li');
+li.forEach(dot =>
+  dot.addEventListener('click', () => {
+    let dotIndex = slides.indexOf(dot.getAttribute('href'));
+    console.log(index);
+    // Go to previous slides
+    while (dotIndex < index) {
+      index -= 1;
+      translateSlide();
+      console.log(index);
+    }
+    // Go to next slides
+    while (dotIndex > index) {
+      index += 1;
+      translateSlide();
+      console.log(index);
+    }
+  })
+);
+
+// TODO: Fill in dots according to current slide being shown
 
 // OLD STUFF
 

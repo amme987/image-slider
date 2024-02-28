@@ -32,7 +32,7 @@ img {
 .images {
   display: flex;
   width: 300px;
-  overflow: hidden;
+  overflow: clip;
   border: 1px solid red;
   /* position: relative; */
 }
@@ -49,10 +49,12 @@ menu {
 }
 
 li {
-  color: transparent;
-  text-shadow: 0 0 darkgray;
+  list-style-type: none;
+  /* color: transparent;
+  text-shadow: 0 0 darkgray; */
 }
 
 li:hover {
-  text-shadow: 0 0 lightgray;
+  color: transparent;
+  text-shadow: 0 0 black;
 }

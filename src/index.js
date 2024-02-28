@@ -19,28 +19,39 @@ const slides = [
 });
 
 const arrows = document.getElementsByClassName('arrow');
-let count = 0;
+let index = 0;
 [...arrows].forEach(arrow =>
   arrow.addEventListener('click', function (e) {
-    console.log(e);
+    // console.log(e);
     this.matches('.previous') ? previousSlide() : nextSlide();
   })
 );
 
 function previousSlide() {
-  count++;
+  index -= 1;
+  if (index < 0) {
+    index = slides.length - 1;
+  }
   const tests = document.querySelectorAll('img');
   [...tests].forEach(
-    test => (test.style.transform = `translate(${count * 300}px)`)
+    test => (test.style.transform = `translate(${index * -300}px)`)
   );
+  console.log(index);
 }
 
 function nextSlide() {
-  count--;
+  index += 1;
+  if (index >= slides.length) {
+    // const repeat = images.cloneNode(true).childNodes;
+    // images.appendChild([...repeat][0]);
+    index = 0;
+  }
   const tests = document.querySelectorAll('img');
+  console.log([...tests]);
   [...tests].forEach(test => {
-    test.style.transform = `translate(${count * 300}px)`;
+    test.style.transform = `translate(${index * -300}px)`;
   });
+  console.log(index);
 }
 
 const navigation = document.querySelector('.navigation');
@@ -48,7 +59,7 @@ const navigation = document.querySelector('.navigation');
 slides.forEach(slide => {
   const nav = document.createElement('li');
   nav.setAttribute('href', slide);
-  nav.textContent = '⚫';
+  nav.textContent = '🔘';
   navigation.append(nav);
 });
 
@@ -96,5 +107,3 @@ slides.forEach(slide => {
 //   index = index >= slides.length - 1 ? 0 : index + 1;
 //   img.setAttribute('src', slides[index]);
 // }
-
-// TODO: Know when to stop translation. I think keeping track of the index will help

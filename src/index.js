@@ -80,8 +80,18 @@ let index = 0;
 );
 
 function translateSlide() {
-  const tests = document.querySelectorAll('img');
-  tests.forEach(
-    test => (test.style.transform = `translate(${index * -300}px)`)
-  );
+  const imgs = document.querySelectorAll('img');
+  imgs.forEach(img => (img.style.transform = `translate(${index * -300}px)`));
+}
+
+// Advance the slides every 5 seconds
+let advance = setInterval(advanceSlide, 5000);
+function advanceSlide() {
+  index += 1;
+  if (index >= slides.length) {
+    index = 0;
+  }
+  // Fill in dot according to slide index
+  fillIn.bind(li[index])();
+  translateSlide();
 }

@@ -1,13 +1,12 @@
 import './style.css';
+import Dock from './dock.jpeg';
+import Forest from './forest.jpg';
+import Mountains from './mountains.jpeg';
 
 const images = document.querySelector('.images');
 
-const slides = [
-  '../src/dock.jpeg',
-  '../src/forest.jpg',
-  '../src/mountains.jpeg',
-];
-
+const slides = [Dock, Forest, Mountains];
+console.log(Dock.src);
 slides.forEach(slide => {
   const image = document.createElement('img');
   image.setAttribute('src', slide);
